@@ -1,0 +1,45 @@
+---
+- name: Uninstall Nillion Verifier Node using Ansible
+  hosts: all
+  become: true
+
+  vars:
+    NODE_NAME: nillion-verifier
+    NODE_DIR: "/root/nillion/accuser"
+    SERVICE_NAME: nillion-verifier-node
+
+  tasks:
+    - name: Stop Nillion Verifier Node service
+      systemd:
+        name: "{{ SERVICE_NAME }}"
+        state: stopped
+      ignore_errors: yes
+
+    - name: Disable Nillion Verifier Node service
+      systemd:
+        name: "{{ SERVICE_NAME }}"
+        enabled: no
+      ignore_errors: yes
+
+    - name: Remove Nillion Verifier Node service file
+      file:
+        path: /etc/systemd/system/{{ SERVICE_NAME }}.service
+        state: absent
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true
+
+    - name: Remove Nillion Docker image
+      docker_image:
+        name: nillion/retailtoken-accuser
+        state: absent
+
+    - name: Remove Nillion node directory
+      file:
+        path: "{{ NODE_DIR }}"
+        state: absent
+
+    - name: Display uninstallation complete message
+      debug:
+        msg: "Nillion Verifier Node has been successfully uninstalled. Docker remains installed on the system."
