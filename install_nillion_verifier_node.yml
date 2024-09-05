@@ -68,11 +68,7 @@
           5. Wait 30-60 minutes after registration before starting the node service.
           6. After waiting, start the service manually with: sudo systemctl start nillion-verifier-node
 
-    - name: Enable Nillion Verifier Node service (do not start immediately)
-      systemd:
-        name: nillion-verifier-node
-        enabled: yes
-        state: stopped
+
     - name: Create a systemd service file for Nillion Verifier Node
       template:
         src: templates/nillion-verifier-node.service.j2
@@ -87,7 +83,7 @@
       systemd:
         daemon_reload: true
 
-    - name: Enable Nillion Verifier Node service
+    - name: Enable Nillion Verifier Node service (do not start immediately)
       systemd:
         name: nillion-verifier-node
         enabled: true
