@@ -6,7 +6,7 @@
   vars:
     NODE_NAME: nillion-verifier
     NODE_DIR: "/root/nillion/accuser"
-    DOCKER_IMAGE: "nillion/retailtoken-accuser:v1.0.1"
+    DOCKER_IMAGE: "nillion/verifier:v1.0.1"
     RPC_ENDPOINT: "https://testnet-nillion-rpc.lavenderfive.com"
     BLOCK_START: "5392038"
 

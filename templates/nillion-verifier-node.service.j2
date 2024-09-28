@@ -7,7 +7,7 @@ After=docker.service
 Type=simple
 Restart=always
 WorkingDirectory={{ node_dir }}
-ExecStart=/usr/bin/docker run --rm --name {{ NODE_NAME }} -v {{ node_dir }}:/var/tmp {{ DOCKER_IMAGE }} accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start 5392038
+ExecStart=/usr/bin/docker run --rm --name {{ NODE_NAME }} -v {{ node_dir }}:/var/tmp {{ DOCKER_IMAGE }} verify --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com"
 ExecStop=/usr/bin/docker stop {{ NODE_NAME }}
 
 [Install]
